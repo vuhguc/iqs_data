@@ -141,7 +141,9 @@ if __name__ == '__main__':
             response = requests.get(url, cookies=cookies)
             print(response.status_code)
             if response.status_code == 200:
-                with open(os.path.join(CSV_DIRNAME, '{}_{}.csv'.format(start_date, end_date)), 'wb') as csv_file:
+                csv_filename = '{}_{}.csv'.format(start_date, end_date)
+                print('saving into {} ...'.format(csv_filename))
+                with open(os.path.join(CSV_DIRNAME, csv_filename), 'wb') as csv_file:
                     csv_file.write(response.content)
                 break
             else:
