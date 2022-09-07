@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import mysql.connector
 
-from config import MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_TABLENAME, CSV_DIRNAME
+from config import MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_TABLENAME, MYSQL_CHARSET, MYSQL_COLLATE, CSV_DIRNAME
 
 if __name__ == '__main__':
 
@@ -35,8 +35,8 @@ if __name__ == '__main__':
                 journal text,
                 citation_count int,
                 PRIMARY KEY (s_id)
-            ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-        '''.format(MYSQL_TABLENAME)
+            ) DEFAULT CHARSET={} COLLATE={};
+        '''.format(MYSQL_TABLENAME, MYSQL_CHARSET, MYSQL_COLLATE)
     )
     db.commit()
 

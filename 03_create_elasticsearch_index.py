@@ -1,6 +1,6 @@
 import subprocess
 
-from config import JDBC_JARNAME, MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_TABLENAME, ELASTICSEARCH_INDEXNAME, LOGSTASH_BINNAME
+from config import JDBC_DRIVER_LIBRARY, JDBC_DRIVER_CLASS, JDBC_CONNECTION_STRING, MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_TABLENAME, ELASTICSEARCH_INDEXNAME, LOGSTASH_BINNAME
 
 if __name__ == '__main__':
     with open('logstash.conf', 'w') as conf_file:
@@ -8,8 +8,8 @@ if __name__ == '__main__':
 '''input {{
   jdbc {{
     jdbc_driver_library => "{}"
-    jdbc_driver_class => "com.mysql.jdbc.Driver"
-    jdbc_connection_string => "jdbc:mysql://localhost:3306?useCursorFetch=true"
+    jdbc_driver_class => "{}"
+    jdbc_connection_string => "{}"
     jdbc_user => "{}"
     jdbc_paging_enabled => true
     jdbc_page_size => 20000
@@ -31,7 +31,9 @@ output {{
   }}
 }}
 '''.format(
-    JDBC_JARNAME,
+    JDBC_DRIVER_LIBRARY,
+    JDBC_DRIVER_CLASS,
+    JDBC_CONNECTION_STRING,
     MYSQL_USERNAME,
     MYSQL_PASSWORD,
     MYSQL_TABLENAME,
